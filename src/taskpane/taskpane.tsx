@@ -5,8 +5,6 @@ import App from './components/App';
 
 initializeIcons();
 
-let isOfficeInitialized = false;
-
 const render = (Component: React.ComponentType) => {
   ReactDOM.render(
     <Component />,
@@ -16,6 +14,5 @@ const render = (Component: React.ComponentType) => {
 
 /* Render application after Office initializes */
 Office.onReady(() => {
-  isOfficeInitialized = true;
   render(App);
 });

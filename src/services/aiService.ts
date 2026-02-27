@@ -189,17 +189,24 @@ function parseDataCleaningAction(input: string): ExcelAction {
 export async function callLLMAPI(userInput: string): Promise<ExcelAction> {
   // This is a placeholder for actual API integration
   // In production, you would:
-  // 1. Call OpenAI API with structured prompt
-  // 2. Parse the response
-  // 3. Return structured action
+  // 1. Configure API key via environment variables
+  // 2. Call OpenAI API with structured prompt
+  // 3. Parse the response
+  // 4. Return structured action
   
-  const apiKey = 'YOUR_API_KEY_HERE'; // Should be stored securely
+  // API key should be stored in environment variables, not hardcoded
+  const apiKey = process.env.OPENAI_API_KEY || '';
   const endpoint = 'https://api.openai.com/v1/chat/completions';
   
   // For now, fall back to pattern matching
   return processNaturalLanguage(userInput);
   
   /* Production implementation example:
+  if (!apiKey) {
+    console.warn('OpenAI API key not configured, using pattern matching');
+    return processNaturalLanguage(userInput);
+  }
+
   const response = await fetch(endpoint, {
     method: 'POST',
     headers: {
