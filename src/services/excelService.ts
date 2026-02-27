@@ -108,7 +108,9 @@ async function executeFormulaAction(action: ExcelAction): Promise<ExcelActionRes
     if (action.parameters.column) {
       // Create formula for specific column
       const column = action.parameters.column;
-      const lastRow = range.rowCount + range.address.match(/\d+/)[0] - 1;
+      const addressMatch = range.address.match(/\d+/);
+      const startRow = addressMatch ? parseInt(addressMatch[0]) : 1;
+      const lastRow = range.rowCount + startRow - 1;
       formula = `=${formulaType}(${column}:${column})`;
     } else {
       // Create formula for selected range
